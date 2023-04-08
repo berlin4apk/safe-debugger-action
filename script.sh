@@ -178,6 +178,7 @@ while [ -S "${TMATE_SOCK}" ]; do
       echo "    ${ENC_URL_SHORT}"
       echo "Or run"
       echo -e '    echo "\e[33mENCRYPTED_STRING\e[0m" | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"\e[33mTMATE_ENCRYPT_PASSWORD\e[0m"'
+      echo -e '    echo "\e[33m${SSH_ENC}\e[0m" | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"\e[33m\$TMATE_ENCRYPT_PASSWORD\e[0m"'
     else
       echo "You have not configured TMATE_ENCRYPT_PASSWORD for encrypting sensitive information"
       echo "The debugger connection info is only sent to your Slack through SLACK_WEBHOOK_URL"
