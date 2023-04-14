@@ -69,6 +69,22 @@ fi
 # Generate ssh key if needed
 [ -e ~/.ssh/id_rsa ] || ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
 
+# some tmux / tmate config options
+cat <<-EOF >> ~/.tmate.conf
+# https://medium.com/free-code-camp/tmux-in-practice-scrollback-buffer-47d5ffa71c93
+
+# When scrolling with mouse wheel, reduce number of scrolled rows per tick to "2" (default is 5)
+bind -T copy-mode-vi WheelUpPane select-pane \; send-keys -X -N 2 scroll-up
+bind -T copy-mode-vi WheelDownPane select-pane \; send-keys -X -N 2 scroll-down
+
+# Let’s enable mouse support:
+set -g mouse on
+
+# https://superuser.com/posts/492285/revisions
+# Allow xterm titles in terminal window, terminal scrolling with scrollbar, and setting overrides of C-Up, C-Down, C-Left, C-Right
+set -g terminal-overrides "xterm*:XT:smcup@:rmcup@:kUP5=\eOA:kDN5=\eOB:kLFT5=\eOD:kRIT5=\eOC"
+EOF
+
 # Run deamonized tmate
 echo Running tmate...
 
